@@ -1,0 +1,9 @@
+# Latex output
+*.aux
+*.log
+*.out
+*.swp
+*.DS_Store
+*.toc
+*.jpg
+*.backup

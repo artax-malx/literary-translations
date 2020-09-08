@@ -1,0 +1,367 @@
+% universal settings
+\documentclass[smalldemyvopaper,11pt,twoside,onecolumn,openright,extrafontsizes]{memoir}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[osf]{Alegreya,AlegreyaSans}
+
+% PACKAGE DEFINITION
+% typographical packages
+\usepackage{microtype} % for micro-typographical adjustments
+\usepackage{setspace} % for line spacing
+\usepackage{lettrine} % for drop caps and awesome chapter beginnings
+\usepackage{titlesec} % for manipulation of chapter titles
+
+% for placeholder text
+\usepackage{lipsum} % to generate Lorem Ipsum
+
+% Package for Intro
+\usepackage{verse}
+
+% other
+\usepackage{calc}
+\usepackage{hologo}
+\usepackage[hidelinks]{hyperref}
+%\usepackage{showframe}
+\usepackage{graphicx}
+
+% PHYSICAL DOCUMENT SETUP
+% media settings
+\setstocksize{8.5in}{5.675in}
+\settrimmedsize{8.5in}{5.5in}{*}
+\setbinding{0.175in}
+%\setlrmarginsandblock{0.611in}{1.222in}{*}
+%\setulmarginsandblock{0.722in}{1.545in}{*}
+\setlrmarginsandblock{0.611in}{1.222in}{*}
+\setulmarginsandblock{0.500in}{1.545in}{*}
+\usepackage[export]{adjustbox}
+\usepackage[bottom]{footmisc}
+\setheadfoot{0.0in}{1.1in}
+
+% defining the title and the author
+%\title{\LaTeX{} ePub Template}
+%\title{\textsc{How I Started to Love {\fontfamily{cmr}\selectfont\LaTeX{}}}}
+\title{Out the Darkness of Ages}
+\author{Idris Bazorkin}
+\newcommand{\ISBN}{0-000-00000-2}
+\newcommand{\press}{The Humble Translator}
+\newcommand{\translation}{Translated from original in Russian}
+
+% custom second title page
+\makeatletter
+\newcommand*\halftitlepage{\begingroup % Misericords, T&H p 153
+  \setlength\drop{0.1\textheight}
+  \begin{center}
+
+  \vspace*{\drop}
+  \rule{\textwidth}{0in}\par
+  {\Large\textsc\thetitle\par}
+  \rule{\textwidth}{0in}\par
+  \vfill
+  \end{center}
+\endgroup}
+\makeatother
+
+% custom title page
+\thispagestyle{empty}
+\makeatletter
+\newlength\drop
+\newcommand*\titleM{\begingroup % Misericords, T&H p 153
+  \setlength\drop{0.15\textheight}
+  \begin{center}
+  \vspace*{\drop}
+  \rule{\textwidth}{0in}\par
+  {\HUGE\textsc\thetitle\par}
+  \rule{\textwidth}{0in}\par
+  {\Large\textit\theauthor\par}
+  \rule{\textwidth}{0in}\par
+  {\Large\scshape\translation\par}
+  \vfill
+  {\Large\scshape\press}
+  \end{center}
+\endgroup}
+\makeatother
+
+% chapter title manipulation
+% padding with zero
+\renewcommand*\thechapter{\ifnum\value{chapter}<10 0\fi\arabic{chapter}}
+% chapter title display
+\titleformat
+{\chapter}
+[display]
+{\normalfont\scshape\huge}
+{\HUGE\thechapter\centering}
+{0pt}
+{\vspace{18pt}\centering}[\vspace{42pt}]
+
+% typographical settings for the body text
+\setlength{\parskip}{0em}
+\linespread{1.09}
+
+% HEADER AND FOOTER MANIPULATION
+  % for normal pages
+  \nouppercaseheads
+  \headsep = 0.16in
+  \makepagestyle{mystyle} 
+  \setlength{\headwidth}{\dimexpr\textwidth+\marginparsep+\marginparwidth\relax}
+  \makerunningwidth{mystyle}{\headwidth}
+  \makeevenhead{mystyle}{}{\textsf{\scriptsize\scshape\thetitle}}{}
+  \makeoddhead{mystyle}{}{\textsf{\scriptsize\scshape\leftmark}}{}
+  \makeevenfoot{mystyle}{}{\textsf{\scriptsize\thepage}}{}
+  \makeoddfoot{mystyle}{}{\textsf{\scriptsize\thepage}}{}
+  \makeatletter
+  \makepsmarks{mystyle}{%
+  \createmark{chapter}{left}{nonumber}{\@chapapp\ }{.\ }}
+  \makeatother
+  % for pages where chapters begin
+  \makepagestyle{plain}
+  \makerunningwidth{plain}{\headwidth}
+  \makeevenfoot{plain}{}{}{}
+  \makeoddfoot{plain}{}{}{}
+  \pagestyle{mystyle}
+% END HEADER AND FOOTER MANIPULATION
+
+% table of contents customisation
+\renewcommand\contentsname{\normalfont\scshape Contents}
+\renewcommand\cftchapterfont{\normalfont}
+\renewcommand{\cftchapterpagefont}{\normalfont}
+\renewcommand{\printtoctitle}{\centering\Huge}
+
+% layout check and fix
+\checkandfixthelayout
+\fixpdflayout
+
+% make sure footnotes don't break across pages
+%\interfootnotelinepenalty=10000
+
+% Epigraphs.
+\usepackage{epigraph}
+
+%\setlength\epigraphwidth{.8\textwidth}
+%\setlength\epigraphrule{0pt}
+
+% BEGIN THE DOCUMENT
+\begin{document}
+\pagestyle{empty}
+% the half title page
+\halftitlepage
+\cleardoublepage
+\begin{figure}
+    \centering
+    \includegraphics[width=1.3\linewidth, center]{./images/mountain_village.jpg}
+    \label{fig:mountain_village}
+\end{figure}
+
+% the title page
+\titleM
+\clearpage
+% copyright page
+\noindent{\small{This novel is entirely a work of fiction. The names, characters and incidents portrayed in it are the product of the author's imagination. Any resemblance to actual persons, living or dead, or events or localities is entirely coincidental.\par\vfill\noindent Paperback Edition\space\today\\ISBN\space\ISBN\\\copyright\space\theauthor. All rights reserved.\par\vfill\noindent\theauthor\space asserts the moral right to be identified as the author of this work. All rights reserved in all media. No part of this publication may be reproduced, stored in a retrieval system, or transmitted, in any form, or by any means, electronic, mechanical, photocopying, recording or otherwise, without the prior written permission of the author and/or the publisher.\par}}
+\clearpage
+
+% dedication
+\begin{center}
+\itshape{\noindent{Dedicated to all passionate about their culture.}}
+\medskip
+\begin {flushright}
+--- \textit{The Humble Translator}
+\end {flushright}
+
+\end{center}
+
+% begin front matter
+\frontmatter
+\pagestyle{mystyle}
+% preface
+\chapter*{Foreword}
+This book is not an encyclopedia of the life of the Ingush people over the
+past century. It narrates the shaping of individuals, the struggle of characters
+under historically significant circumstances, and the people creating this
+history.\par What prompted me to write this novel? For many years material has been
+accumulating. A thousand people crossed my life’s path. Participant of or witness
+to the many events in our era — turbulent, arduous and romantic — I
+had to be myself. All this forced me to think I should share it all with my
+contemporaries and those readers who will have to acquaint with us already from
+afar. 
+\medskip
+\begin {flushright}
+--- \textit{\theauthor, 1968}
+\end {flushright}
+
+\chapter*{Intro}
+\epigraphhead[20]{
+\epigraph{\itshape \dots The life of a people is without death, whatever may happen to
+    it.}{Nikolai Tikhonov}}
+
+%\vspace{-3em}
+
+\begin{verse}
+Snowy heights,\\
+towering cliffs,\\
+from the world’s creation\\
+in the chaos risen to the sky,\\
+dense forests,\\
+boiling streams of clamorous rivers,\\
+meadows, caught in a rainbow of blossom\\
+and the aroma of grasses,\\
+and a proud soul ready to die for friendship,\\
+honour, freedom, — \\
+all this from times immemorial\\
+is referred to in folk tales\\
+as the country of epics\\
+and the name — Kavkaz\footnote{Kavkaz — Caucasus (Russian).}!\\
+In many languages\\
+here sounds human speech.\\
+Here lives a brotherhood of peoples.\\
+When did they come, whence and why?..\\
+Nobody will answer this to the people.\\
+But perhaps, they are here of yore?..\\
+Among the mountain spurs is a Blue lake\footnote{Blue Lake in Chechnya — Lake Kezenoyam.} in \rlap{Chechnya.}\\
+There swim the stars, and the moon,\\
+and the dawn  — at the break of day.\\
+In it drowned a reflection of the ancients...\\
+On its secret shores\\
+scientists found\\
+a site of the first settlers.\\
+At hearths, ignited by lightning,\\
+their silhouettes were frozen in the darkness \rlap{of ages.}\\
+What did they see?\\
+How imagined they\\
+the fate of future generations?\\
+Silence. No answer.\\
+Surmise alone can relate about the past...\\
+That was twenty thousand years ago!\\
+But perhaps, these were our ancestors?\\
+Strabon and Pliny; Movses Khorenatsi\\
+left for the world names of\\
+people once present on the Caucasus.\\
+And through the fog of three thousand years\\
+our peoples' names came to be.\\
+For hundreds of years we inherited the cliffs,\\
+on those cliffs — stone towers,\\
+cemeteries of mute corpses...\\
+Where an imprint of man's hand,\\
+where the sun a sign — \rlap{earth's motion symbol,}\\
+where a tur's horn on faded walls\\
+tell us sparingly about our ancestors.\\
+But there was yet another secret keeper — \rlap{language!}\\
+Ever alive and strong,\\
+to decay, to battle unyielding\\
+language the sage of my people is.\\
+In it the memory of days past\\
+and the nightingale's song.\\
+In it preserved the myth about Teyshabayn\footnote{By ancient lore a city believed to have once been on the Caucasus.},\\
+the tale about Batu, — grandson \rlap{of Genghis Khan —} \\
+and the battle with Timur the Lame,\\
+world conqueror, but not those mountains!\\
+Language told me how hard \rlap{it was for our forefathers,}\\
+how their courage and love for freedom\\
+extended our lives to these days...\\
+And yet a non literate people — almost mute.\\
+That's how it was from the world's creation\\
+till these hundred years on earth.\\
+And here came our age —\\
+the age of triumph of progress,\\
+search for thoughts enlightened, \rlap{joyous hopes!}\\
+Henceforth\\
+there will be no secrets of our people.\\
+To the future dead will not be legends,\\
+tragedies, victories and love.\\
+The sign of time is another. Another life \rlap{is flowing.}\\
+Who gazes intently, is the one who \rlap{sees very much.}\\ 
+Who listens, to that one time speaks.\\
+My years were extended — by the elders.\\
+They brought me to the day of yesterday.\\
+To the day of tomorrow\\
+we depart together,\\
+to those following suit,\\
+leaving this story\\
+about how\\
+the people came out the darkness.
+\end{verse}
+
+% acknowledgements
+% table of contents
+\clearpage
+\tableofcontents
+
+% begin main matter
+\mainmatter
+\chapter{Dream}
+The cliffs of the Tsey-Lom\footnote{Tsey-Lom — Holy mountain (Ingush).} shone white in the setting sun, surrounding
+like a wall the small terraces of the farming lands. In the centre of these
+lands towered an enormous boulder stone. Hundreds, maybe thousands of
+years ago it broke off the mountain and came to rest here, halfway to the
+precipice, crushing beneath it a whole mountain field. In days of old
+songs were passed on about it. But time has left the people only a tale about
+how in his fury the mighty nart\footnote{Nart — a rich man in Caucasus folk epics.}
+Seska-Solsa brought down the cliff onto his enemies. 
+And that it’s called — the cliff of Seska-Solsa.\par
+Nearing towards its end was the month of the Cuckoo\footnote{For the Ingush the month of the Cuckoo approximately coincides with April.},
+and the mountaineers were preparing for fieldwork. Autumn downpours, winter
+snowslides carried rocks onto the ploughlands and meadows. Not having them removed,
+one could neither plough nor mow. For the third day already Daouli
+had been walking about the slope, carrying pebbles to the edge of the field,
+where over many ages from such stones entire mounds had grown. When having to 
+walk far till a mound, Daouli put the stones down at the abuttal’s
+edge, straightening the low side of the terrace. For the third day she
+was alone at work, because the meat preserved from spring was used up,
+cereal flour was running out and her husband had departed for the blue
+cliffs, the snowy heights, to procure a tur\footnote{Wild goat native to the
+Caucasus.} or a chamois.\par
+Daouli was tired, hands scratched all over by the stones. Back aching, yet
+there was still such work ahead! They had to fertilize their lands in that year.
+Three years Daouli had been gathering manure, and now it had to be carried over
+in baskets and scattered about the ploughlands. Otherwise the land would not
+bear anymore.\par
+All this was business as usual for Daouli. But now Daouli was expecting a
+child. At times work fell from her hands. She was afraid of lifting large
+stones from the land. After all, already two children the gods had taken to
+themselves. Her husband reproached her that there was no heir.\par
+Five years back\footnote{The current year is 1865.}, when the tsar ordered to drive away the Ingush from their
+planar aouls\footnote{Aoul — Village (Ingush).} back into the mountains, Daouli together with the others came back
+here to these ancestral bare towers. Their house and all that they had remained
+in the village Angusht\footnote{Angusht — Ingush aoul.}, surrounded by green gardens. But here one had to lift
+to the fields not only the manure, but also the land. There was nobody to look
+after the children. The first year they hardly reaped what they sowed. Winter
+in a tower, like in a bottle dungeon, then --- famine\dots The children
+weakened. And when in spring they had to procure themselves sustenance in the
+forest, eat different herbs, they withered and died one after another.\par
+Since then Daouli hasn't had children. Her husband, and he already had become
+a muslim in his childhood, somehow brought her from the mullah blessed
+water, bought an amulet, but nothing helped. The women elders explained it with
+the <<change of life>> having ruined her, and advised to turn to the help of
+the local gods. Daouli obeyed. Secretly, she went to the aoul Kek, where in
+front of the temple of fertility of the divine-faced Tousholi there stood a
+stone pillar --- symbol of manly power. She pushed into the window of the
+temple a triangular flatbread with the image of a cross and lighted in the
+niche an improvised candle, then, falling onto her knees in front of the stone
+statue, showed him her bared chest and prayed to send children. And here the
+fruit of her prayer, her hope lives with her under her heart.\par
+Daouli rested at the water spring, which beat out from underneath the cliff of
+Seska-Solsa, listened to how the little one moved, and reassured went home. The
+footpath to the village twined high over the mountain, the slope of which
+sometimes broke by the steep wall. Below rushed about a river squeezed by
+boulders. Daouli stopped to rest. Lately these slopes came to her uneasily.
+She looked round the lower path, to the extent allowed by the meandering gorge,
+but her husband was not to be seen.
+
+% begin back matter
+
+\chapter{Pagans}
+\chapter{First love}
+\chapter{At the old tower}
+\chapter{Festival of the divine-faced Tousholi}
+\chapter{Before dawn}
+\chapter{Soldiers}
+\chapter{<<I -- committee!>>}
+\chapter{Out the darkness of ages}
+
+\pagestyle{empty}
+\cleardoublepage
+\begin{figure}
+    \centering
+    \includegraphics[width=1.3\linewidth, center]{./images/depart_for_war.jpg}
+    \label{fig:mountain_village}
+\end{figure}
+\end{document}
+% END THE DOCUMENT
