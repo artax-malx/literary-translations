@@ -1,4 +1,4 @@
-Caucasus-Literature
+Literary-Translations
 ===================
 
 Project to translate to English the little known primers of literature from and about the
